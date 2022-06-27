@@ -14,21 +14,14 @@ workflows:
           filters:
             branches:
               only:
-                - master
-      - deploy-web-client:
-          requires:
-            - build-web-client
-          filters:
-            branches:
-              only:
-                - master
+                - main
       - deploy-server:
           requires: 
             - build-server
           filters:
             branches:
               only:
-                - master
+                - main
             
 jobs:
   build-native-client:
