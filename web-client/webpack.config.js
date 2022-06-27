@@ -7,7 +7,6 @@ const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
     mode: 'development',
-    watch: true,
     entry: ['./src/index.tsx'],
     devtool: 'inline-source-map',
     module: {
@@ -61,28 +60,10 @@ module.exports = {
         }),
     ],
     devServer: {
-        contentBase: path.resolve(__dirname, 'dist'),
         liveReload: true,
         port: 8080,
         https: true,
         hot: true,
         historyApiFallback: true,
-        writeToDisk: false,
-        stats: {
-            colors: true,
-            hash: false,
-            version: false,
-            timings: false,
-            assets: false,
-            chunks: false,
-            modules: false,
-            reasons: false,
-            children: false,
-            source: false,
-            errors: true,
-            errorDetails: false,
-            warnings: false,
-            publicPath: false,
-        },
     },
 };

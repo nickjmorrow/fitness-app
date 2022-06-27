@@ -1,7 +1,6 @@
 // external
 import React from 'react';
 import styled from 'styled-components';
-import { GithubIcon } from '@nickjmorrow/react-component-library';
 
 // inter
 import { Typography } from '~/core/atoms/Typography';
@@ -12,9 +11,6 @@ export const Footer: React.FC = () => {
     return (
         <StyledFooter>
             <Typography style={{ marginRight: theme.spacing.ss8, color }}>Nicholas Morrow</Typography>
-            <a href="https://github.com/nickjmorrow" target="_blank" rel="noopener noreferrer">
-                <GithubIcon style={{ color }} />
-            </a>
         </StyledFooter>
     );
 };
