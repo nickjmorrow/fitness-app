@@ -6,8 +6,30 @@ workflows:
   build-deploy:
     jobs:
       - build-native-client
+      - build-web-client
       - build-server
-
+      - deploy-web-client:
+          requires:
+            - build-web-client
+          filters:
+            branches:
+              only:
+                - master
+      - deploy-web-client:
+          requires:
+            - build-web-client
+          filters:
+            branches:
+              only:
+                - master
+      - deploy-server:
+          requires: 
+            - build-server
+          filters:
+            branches:
+              only:
+                - master
+            
 jobs:
   build-native-client:
     executor:
@@ -33,6 +55,30 @@ jobs:
           root: ./
           paths:
             - native-client/node_modules
+  build-web-client:
+    executor:
+      name: node/default
+    steps:
+      - checkout
+      - node/install-packages:
+          cache-path: native-client/node_modules
+          app-dir: native-client
+      - run:
+          command: npm run format
+          name: Check for Formatting Errors
+          working_directory: native-client
+      - run:
+          command: npm run lint
+          name: Check for Linting Errors
+          working_directory: native-client
+      - run:
+          command: npm test
+          name: Run Tests
+          working_directory: native-client
+      - persist_to_workspace:
+          root: ./
+          paths:
+            - native-client/node_modules
   build-server:
     executor:
       name: node/default
@@ -51,7 +97,7 @@ jobs:
           working_directory: server
       - run:
           command: npm test
-          name: Run JavaScript Tests
+          name: Run Tests
           working_directory: server
       - run:
           command: npm run build
@@ -62,7 +108,17 @@ jobs:
           paths:
             - server/dist
             - server/node_modules
-  deploy-backend:
+  deploy-web-client:
+    executor:
+      name: node/default
+    steps:
+      - attach_workspace:
+          at: ./
+      - run:
+          name: Netlify Deploy
+          working_directory: client
+          command: node_modules/.bin/netlify deploy --site $NETLIFY_SITE_ID --auth $NETLIFY_ACCESS_TOKEN --prod --dir prod
+  deploy-server:
     executor: heroku/default
     steps:
       - checkout
