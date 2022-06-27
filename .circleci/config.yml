@@ -28,10 +28,6 @@ jobs:
           command: npm test
           name: Run JavaScript Tests
           working_directory: native-client
-      - run:
-          command: npm run ios
-          name: Build JavaScript
-          working_directory: native-client
       - persist_to_workspace:
           root: ./
           paths:
