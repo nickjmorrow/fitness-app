@@ -6,6 +6,7 @@ workflows:
   build-deploy:
     jobs:
       - build-native-client
+      - build-server
 
 jobs:
   build-native-client:
@@ -32,7 +33,7 @@ jobs:
           root: ./
           paths:
             - native-client/node_modules
-  build-and-test-server:
+  build-server:
     executor:
       name: node/default
     steps:
@@ -41,7 +42,7 @@ jobs:
           cache-path: server/node_modules
           app-dir: server
       - run:
-          command: npm run format
+        command: npm run format:ci
           name: Check for Formatting Errors
           working_directory: server
       - run:
