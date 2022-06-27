@@ -1,0 +1,75 @@
+version: 2.1
+orbs:
+  node: circleci/node@3.0.0
+  heroku: circleci/heroku@0.0.10
+workflows:
+  build-deploy:
+    jobs:
+      - build-native-client
+
+jobs:
+  build-native-client:
+    executor:
+      name: node/default
+    steps:
+      - checkout
+      - node/install-packages:
+          cache-path: native-client/node_modules
+          app-dir: native-client
+      - run:
+          command: npm run format
+          name: Check for Formatting Errors
+          working_directory: native-client
+      - run:
+          command: npm run lint
+          name: Check for Linting Errors
+          working_directory: native-client
+      - run:
+          command: npm test
+          name: Run JavaScript Tests
+          working_directory: native-client
+      - run:
+          command: npm run build
+          name: Build JavaScript
+          working_directory: native-client
+      - persist_to_workspace:
+          root: ./
+          paths:
+            - native-client/node_modules
+  build-and-test-server:
+    executor:
+      name: node/default
+    steps:
+      - checkout
+      - node/install-packages:
+          cache-path: server/node_modules
+          app-dir: server
+      - run:
+          command: npm run format
+          name: Check for Formatting Errors
+          working_directory: server
+      - run:
+          command: npm run lint
+          name: Check for Linting Errors
+          working_directory: server
+      - run:
+          command: npm test
+          name: Run JavaScript Tests
+          working_directory: server
+      - run:
+          command: npm run build
+          name: Build JavaScript
+          working_directory: server
+      - persist_to_workspace:
+          root: ./
+          paths:
+            - server/dist
+            - server/node_modules
+  deploy-backend:
+    executor: heroku/default
+    steps:
+      - checkout
+      - heroku/install
+      - heroku/deploy-via-git:
+          force: true
+
