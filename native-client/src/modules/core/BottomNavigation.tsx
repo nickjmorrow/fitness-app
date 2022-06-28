@@ -15,7 +15,7 @@ type Props = {
 
 export const BottomNavigation = ({ navigation }: Props) => {
   return (
-    <Tab.Navigator initialRouteName="Home">
+    <Tab.Navigator>
       <Tab.Screen name="Home" component={HomeScreen} />
       <Tab.Screen name="History" component={HistoryScreen} />
       <Tab.Screen name="StartWorkout" component={StartWorkoutScreen} />

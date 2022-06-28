@@ -9,9 +9,8 @@ type Props = NativeStackScreenProps<RootStackParamList, 'Home'>;
 export const HomeScreen = ({ navigation }: Props) => {
   console.log('HomeScreen.tsx');
   return (
-    <View>
+    <View style={{ flex: 1, height: 100 }}>
       <Text>Hello, world!</Text>
-      <Text>Testing, testing, testing</Text>
     </View>
   );
 };
