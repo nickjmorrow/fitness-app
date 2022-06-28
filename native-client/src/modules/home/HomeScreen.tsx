@@ -1,10 +1,17 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { View, Text } from 'react-native';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../core/root-stack-param-list.type';
+import { BottomNavigation } from '../core/BottomNavigation.tsx';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Home'>;
 
 export const HomeScreen = ({ navigation }: Props) => {
-  return <Text>Hello, world!</Text>;
+  console.log('HomeScreen.tsx');
+  return (
+    <View>
+      <Text>Hello, world!</Text>
+      <Text>Testing, testing, testing</Text>
+    </View>
+  );
 };
