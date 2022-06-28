@@ -28,29 +28,31 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 import {HomeScreen} from './src/modules/home/HomeScreen';
 import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {ExercisesScreen} from './src/modules/exercises/ExercisesScreen';
+import {HistoryScreen} from './src/modules/history/HistoryScreen';
+import {StartWorkoutScreen} from './src/modules/start-workout/StartWorkoutScreen';
+import {createStackNavigator} from '@react-navigation/stack';
 
-const Stack = createNativeStackNavigator();
+type RootStackParamList = {
+  Home: undefined;
+  History: undefined;
+  StartWorkout: undefined;
+  Exercises: undefined;
+};
+
+const RootStack = createStackNavigator<RootStackParamList>();
 
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
 
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <SafeAreaView style={backgroundStyle}>
-          <ScrollView
-            contentInsetAdjustmentBehavior="automatic"
-            style={backgroundStyle}>
-            <HomeScreen />
-          </ScrollView>
-        </SafeAreaView>
-      </Stack.Navigator>
+      <RootStack.Navigator initialRouteName="Home">
+        <RootStack.Screen name="Home" component={HomeScreen} />
+        <RootStack.Screen name="History" component={HistoryScreen} />
+        <RootStack.Screen name="Start Workout" component={StartWorkoutScreen} />
+        <RootStack.Screen name="Exercises" component={ExercisesScreen} />
+      </RootStack.Navigator>
     </NavigationContainer>
   );
 };
