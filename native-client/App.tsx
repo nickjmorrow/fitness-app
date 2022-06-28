@@ -32,13 +32,7 @@ import {ExercisesScreen} from './src/modules/exercises/ExercisesScreen';
 import {HistoryScreen} from './src/modules/history/HistoryScreen';
 import {StartWorkoutScreen} from './src/modules/start-workout/StartWorkoutScreen';
 import {createStackNavigator} from '@react-navigation/stack';
-
-type RootStackParamList = {
-  Home: undefined;
-  History: undefined;
-  StartWorkout: undefined;
-  Exercises: undefined;
-};
+import {RootStackParamList} from './src/modules/core/root-stack-param-list.type';
 
 const RootStack = createStackNavigator<RootStackParamList>();
 
