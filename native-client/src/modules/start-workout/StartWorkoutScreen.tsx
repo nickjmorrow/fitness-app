@@ -1,6 +1,11 @@
 import React from 'react';
-import {Text, View} from 'react-native';
+import { View, Text } from 'react-native';
+import { WorkoutList } from './WorkoutList';
 
 export const StartWorkoutScreen = () => {
-  return <Text>Start Workout Screen</Text>;
+  return <View>
+    <React.Suspense fallback={<Text>Loading...</Text>}>
+      <WorkoutList />
+    </React.Suspense>
+  </View>;
 };
