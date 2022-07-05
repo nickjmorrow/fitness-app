@@ -1,5 +1,5 @@
 // external
-import React from 'react';
+import React, { ErrorInfo } from 'react';
 import styled from 'styled-components';
 import { Switch, Route } from 'react-router';
 import { Provider } from 'react-redux';
@@ -17,36 +17,54 @@ import { ThemeProvider } from '~/theming/ThemeProvider';
 import { Header } from '~/landing/Header';
 import { Footer } from '~/landing/Footer';
 import { Home } from '~/landing/Home';
+import { ErrorScreen } from '~/landing/ErrorScreen';
 
-export const App: React.SFC = () => {
-    return (
-        <Provider store={store}>
-            <ConnectedRouter history={history}>
-                <ThemeProvider>
-                    <Container>
-                        <Header />
-                        <Body>
-                            <Main>
-                                <Switch>
-                                    {componentRouteMappings.map(crm => (
-                                        <Route
-                                            exact={crm.exact}
-                                            key={crm.route}
-                                            path={crm.route}
-                                            component={crm.component as any}
-                                        />
-                                    ))}
-                                    <Route exact={true} route={'/'} component={Home} />
-                                    <Route component={NotFound} />
-                                </Switch>
-                            </Main>
-                        </Body>
-                        <Footer />
-                    </Container>
-                </ThemeProvider>
-            </ConnectedRouter>
-        </Provider>
-    );
+interface State {
+    hasError: boolean;
+}
+
+interface Props { }
+
+export class App extends React.Component<Props, State> {
+    constructor(props: Props) {
+        super(props);
+        this.state = { hasError: false };
+    }
+
+    static getDerivedStateFromError() {
+        return { hasError: true }
+    }
+
+    render() {
+        return (
+            <Provider store={store}>
+                <ConnectedRouter history={history}>
+                    <ThemeProvider>
+                        <Container>
+                            <Header />
+                            <Body>
+                                <Main>
+                                    {this.state.hasError ? <ErrorScreen /> : <Switch>
+                                        {componentRouteMappings.map(crm => (
+                                            <Route
+                                                exact={crm.exact}
+                                                key={crm.route}
+                                                path={crm.route}
+                                                component={crm.component as any}
+                                            />
+                                        ))}
+                                        <Route exact={true} route={'/'} component={Home} />
+                                        <Route component={NotFound} />
+                                    </Switch>}
+                                </Main>
+                            </Body>
+                            <Footer />
+                        </Container>
+                    </ThemeProvider>
+                </ConnectedRouter>
+            </Provider>
+        );
+    }
 };
 
 const Body = styled.div`
