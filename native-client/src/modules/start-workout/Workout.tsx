@@ -1,23 +1,26 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Button, StyleProp, ViewStyle } from 'react-native';
+import { TouchableHighlight } from 'react-native-gesture-handler';
 import { getTheme } from '../core/getTheme';
 
 interface Props {
   id: string;
   name: string;
+  onPress: (workoutId: string) => void;
+  style: StyleProp<ViewStyle>;
 }
 
-export const Workout = ({ id, name }: Props) => {
+export const Workout = ({ id, name, onPress: handlePress, style }: Props) => {
   return (
-    <View style={styles.container}>
+    <TouchableHighlight style={[styles.container, style]} onPress={() => handlePress(id)}>
       <Text style={styles.title}>{name}</Text>
-    </View>
+    </TouchableHighlight>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    width: '50%',
+    width: 120,
     height: 90,
     backgroundColor: getTheme().colors.background,
     borderColor: getTheme().colors.lightGray,
@@ -28,6 +31,6 @@ const styles = StyleSheet.create({
     padding: 6
   },
   title: {
-    color: getTheme().typography.title
+    color: getTheme().typography.title.color
   }
 })

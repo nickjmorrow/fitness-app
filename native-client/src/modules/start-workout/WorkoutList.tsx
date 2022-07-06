@@ -4,10 +4,15 @@ import { useRecoilValue } from 'recoil';
 import { currentWorkoutsQuery } from './state/workouts.state';
 import { Workout } from './Workout';
 
-export const WorkoutList = () => {
+interface Props {
+    onPress: (workoutId: string) => void;
+}
+
+export const WorkoutList = ({ onPress: handlePress }: Props) => {
     const workouts = useRecoilValue(currentWorkoutsQuery);
+    console.log(workouts);
     return (<View style={style.container}><View style={style.innerContainer}>
-        {workouts.map(w => <Workout key={w.id} id={w.id} name={w.name} />)}
+        {workouts.map((w, i) => <Workout style={i % 2 === 0 ? style.left : undefined} key={w.id} id={w.id} name={w.name} onPress={handlePress} />)}
     </View></View>);
 };
 
@@ -20,6 +25,11 @@ const style = StyleSheet.create({
     innerContainer: {
         display: 'flex',
         flexDirection: 'row',
-        marginHorizontal: 70,
+        justifyContent: 'center',
+        width: '100%',
+        flexWrap: 'wrap'
+    },
+    left: {
+        marginRight: 20
     }
 })

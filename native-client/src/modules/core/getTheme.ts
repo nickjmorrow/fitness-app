@@ -4,6 +4,12 @@ export const getTheme = () => ({
         lightGray: 'lightgray',
     },
     typography: {
-        title: 'white'
+        title: {
+            color: 'white',
+            fontSize: 40
+        },
+        paragraph: {
+            color: 'white'
+        }
     }
 })

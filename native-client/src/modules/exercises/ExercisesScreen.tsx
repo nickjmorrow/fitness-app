@@ -1,6 +1,16 @@
 import React from 'react';
-import {Text, View} from 'react-native';
+import { Text, View, StyleSheet } from 'react-native';
+import { getTheme } from '../core/getTheme';
+import { Header } from '../core/Header';
 
 export const ExercisesScreen = () => {
-  return <Text>Exercises Screen</Text>;
+  return <View style={styles.container}><Header title={'Exercises'} /></View>;
 };
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: getTheme().colors.background,
+    flex: 1,
+    height: 100
+  }
+})

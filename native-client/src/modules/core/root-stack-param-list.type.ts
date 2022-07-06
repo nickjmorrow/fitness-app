@@ -3,4 +3,7 @@ export type RootStackParamList = {
   History: undefined;
   StartWorkout: undefined;
   Exercises: undefined;
+  ActiveWorkout: {
+    workoutId: string;
+  };
 };

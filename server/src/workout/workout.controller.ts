@@ -5,7 +5,7 @@ export class WorkoutController {
     @Get()
     getWorkouts() {
         return [{
-            name: 'Legs'
-        }, { name: 'Back' }];
+            name: 'Legs', id: 'legs',
+        }, { name: 'Back', id: 'back' }, { name: 'Arms', id: 'arms' }, { name: 'Chest', id: 'chest' }];
     }
 }

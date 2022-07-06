@@ -24,22 +24,19 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 axios.defaults.baseURL = getBaseUrl();
 
 const Tab = createBottomTabNavigator();
-const Stack = createNativeStackNavigator();
+
 
 const App = () => {
   return (
     <RecoilRoot>
       <GestureHandlerRootView style={{ flex: 1 }}>
         <NavigationContainer>
-          <Stack.Navigator>
-            <Stack.Screen name="WorkoutInProgress" component={HomeScreen} />
-            <Tab.Navigator>
-              <Tab.Screen name="Home" component={HomeScreen} />
-              <Tab.Screen name="StartWorkout" component={StartWorkoutScreen} />
-              <Tab.Screen name="Exercises" component={ExercisesScreen} />
-              <Tab.Screen name="History" component={HistoryScreen} />
-            </Tab.Navigator>
-          </Stack.Navigator>
+          <Tab.Navigator screenOptions={{ headerShown: false }}>
+            <Tab.Screen name="Home" component={HomeScreen} />
+            <Tab.Screen name="StartWorkout" component={StartWorkoutScreen} />
+            <Tab.Screen name="Exercises" component={ExercisesScreen} />
+            <Tab.Screen name="History" component={HistoryScreen} />
+          </Tab.Navigator>
         </NavigationContainer>
       </GestureHandlerRootView>
     </RecoilRoot>

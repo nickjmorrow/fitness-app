@@ -5,7 +5,6 @@ import { componentRouteMappings } from '~/core/componentRouteMappings';
 import { Link } from '~/core/molecules/Link';
 
 export const Home: React.FC = () => {
-    throw new Error("Throwing an error from within Home");
     return (
         <Container>
             <Typography>Hello and welcome!</Typography>
