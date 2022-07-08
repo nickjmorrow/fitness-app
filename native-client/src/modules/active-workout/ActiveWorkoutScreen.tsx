@@ -1,12 +1,13 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Button } from 'react-native';
 import { getTheme } from '../core/getTheme';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../core/root-stack-param-list.type';
 import { Header } from '../core/Header';
 import { currentWorkoutTemplatesQuery } from '../start-workout/state/workout-templates.state';
 import { useRecoilValue } from 'recoil';
-import { ActiveWorkoutExercise } from './ActiveWorkoutExercise';
+import { ActiveWorkoutExercise, ActiveWorkoutExerciseSet } from './ActiveWorkoutExercise';
+import { ExerciseType } from '../core/workout-template.model';
 
 interface OwnProps {
     workoutId: string;
@@ -14,22 +15,28 @@ interface OwnProps {
 
 type Props = OwnProps & NativeStackScreenProps<RootStackParamList, 'ActiveWorkout'>;
 
-
-export const ActiveWorkoutScreen = ({ route }: Props) => {
+export const ActiveWorkoutScreen = ({ route, navigation }: Props) => {
     const currentWorkoutTemplates = useRecoilValue(currentWorkoutTemplatesQuery);
     const activeWorkoutTemplate = currentWorkoutTemplates.find(cwt => cwt.id === route.params.workoutId)!;
     const initialActiveWorkoutState = {
         exercises: activeWorkoutTemplate.exercises.map(e => ({
             id: e.id,
             name: e.name,
-            sets: e.sets
+            exerciseType: e.exerciseType,
+            sets: e.sets.map((set, setIndex): ActiveWorkoutExerciseSet => ({
+                orderId: setIndex + 1,
+                weight: null,
+                ...(e.exerciseType === ExerciseType.DURATION ? { duration: null, exerciseType: ExerciseType.DURATION } : { repetition: null, exerciseType: ExerciseType.REPETITION })
+            }))
         }))
     };
     const [currentActiveWorkoutState, setActiveWorkoutState] = React.useState(initialActiveWorkoutState);
+
     return <View style={styles.container}>
         <Header title={'Active Workout'} />
+        <Button onPress={() => navigation.goBack()} title={'Back'} />
         <Text style={styles.workoutName}>{activeWorkoutTemplate.name}</Text>
-        {activeWorkoutTemplate.exercises.map(e => <ActiveWorkoutExercise name={e.name} key={e.id} />)}
+        {currentActiveWorkoutState.exercises.map(e => <ActiveWorkoutExercise sets={e.sets} exerciseType={e.exerciseType} name={e.name} key={e.id} />)}
     </View>;
 };
 

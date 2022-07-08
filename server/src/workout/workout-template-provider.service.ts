@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { AppSettingConfig } from '../config/app-setting-config.type';
-import { WorkoutTemplateModel } from "./workout-template.model";
+import { ExerciseType, WorkoutTemplateModel } from "./workout-template.model";
 
 @Injectable()
 export class WorkoutTemplateProvider {
@@ -23,6 +23,7 @@ export class WorkoutTemplateProvider {
                     {
                         id: 'squat',
                         name: 'Squat',
+                        exerciseType: ExerciseType.RESISTANCE,
                         sets: [
                             {
                                 isEmpty: true
@@ -38,6 +39,7 @@ export class WorkoutTemplateProvider {
                     {
                         id: 'leg press',
                         name: 'Leg Press',
+                        exerciseType: ExerciseType.RESISTANCE,
                         sets: [
                             {
                                 isEmpty: true
@@ -53,6 +55,7 @@ export class WorkoutTemplateProvider {
                     {
                         id: 'leg extension',
                         name: 'Leg Extension',
+                        exerciseType: ExerciseType.RESISTANCE,
                         sets: [
                             {
                                 isEmpty: true
@@ -68,6 +71,7 @@ export class WorkoutTemplateProvider {
                     {
                         id: 'calf raise',
                         name: 'Calf Raise',
+                        exerciseType: ExerciseType.RESISTANCE,
                         sets: [
                             {
                                 isEmpty: true
@@ -89,26 +93,31 @@ export class WorkoutTemplateProvider {
                     {
                         id: 'bench press',
                         name: 'Bench Press',
+                        exerciseType: ExerciseType.RESISTANCE,
                         sets: []
                     },
                     {
                         id: 'incline bench press',
                         name: 'Incline Bench Press',
+                        exerciseType: ExerciseType.RESISTANCE,
                         sets: []
                     },
                     {
                         id: 'decline bench press',
                         name: 'Decline Bench Press',
+                        exerciseType: ExerciseType.RESISTANCE,
                         sets: []
                     },
                     {
                         id: 'flye',
                         name: 'Flye',
+                        exerciseType: ExerciseType.RESISTANCE,
                         sets: []
                     },
                     {
                         id: 'overhead press',
                         name: 'Overhead Press',
+                        exerciseType: ExerciseType.RESISTANCE,
                         sets: []
                     }
                 ]
@@ -120,16 +129,19 @@ export class WorkoutTemplateProvider {
                     {
                         id: 'deadlift',
                         name: 'Deadlift',
+                        exerciseType: ExerciseType.RESISTANCE,
                         sets: []
                     },
                     {
                         id: 'bent over row',
                         name: 'Bent Over Row',
+                        exerciseType: ExerciseType.RESISTANCE,
                         sets: []
                     },
                     {
                         id: 'shrug',
                         name: 'Shrug',
+                        exerciseType: ExerciseType.RESISTANCE,
                         sets: []
                     },
                 ]
