@@ -5,13 +5,24 @@ import { AppService } from './app.service';
 import { configuration } from './config/configuration';
 import { HealthcheckModule } from './healthcheck/healthcheck.module';
 import { WorkoutModule } from './workout/workout.module';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { DataSeederModule } from './data-seeder/data-seeder.module';
+import { CoreModule } from './core/core.module';
+import ormConfig from './config/ormConfig';
 
 @Module({
-  imports: [HealthcheckModule, WorkoutModule, ConfigModule.forRoot({
-    envFilePath: ['.env.development.local'],
-    load: [configuration]
-  })],
-  controllers: [AppController],
-  providers: [AppService],
+    imports: [
+        TypeOrmModule.forRoot(ormConfig),
+        HealthcheckModule,
+        WorkoutModule,
+        ConfigModule.forRoot({
+            envFilePath: ['.env.development.local'],
+            load: [configuration],
+        }),
+        DataSeederModule,
+        CoreModule,
+    ],
+    controllers: [AppController],
+    providers: [AppService],
 })
-export class AppModule { }
+export class AppModule {}

@@ -1,4 +1,6 @@
-export type WorkoutEntryExerciseSet = {
-    repCount: number;
-    weight: number;
-} | { duration: number };
+export type WorkoutEntryExerciseSet =
+    | {
+          repCount: number;
+          weight: number;
+      }
+    | { duration: number };

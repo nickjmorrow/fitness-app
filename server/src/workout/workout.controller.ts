@@ -16,8 +16,8 @@ interface GetWorkoutEntriesDto {
 export class WorkoutController {
     constructor(
         private readonly workoutTemplateProvider: WorkoutTemplateProvider,
-        private readonly workoutEntryProvider: WorkoutEntryProvider
-    ) { }
+        private readonly workoutEntryProvider: WorkoutEntryProvider,
+    ) {}
 
     @Get('/workout-entries')
     getWorkoutEntries(): GetWorkoutEntriesDto {

@@ -1,19 +1,16 @@
-import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 
-@Entity({ schema: 'public', name: 'default_exercises' })
+@Entity({ schema: 'public', name: 'exercises' })
 export class Exercise {
-    @PrimaryGeneratedColumn({ name: 'default_exercise_id' })
-    public exerciseId!: number;
+    @PrimaryGeneratedColumn('uuid', { name: 'exercise_id' })
+    public exerciseId!: string;
 
     @Column({ name: 'name' })
     public name!: string;
 
-    @Column({ name: 'user_id' })
-    public userId!: string | null;
-
-    @UpdateDateColumn({ name: 'updated_at' })
+    @UpdateDateColumn({ name: 'date_updated' })
     public updatedAt!: Date;
 
-    @CreateDateColumn({ name: 'created_at' })
+    @CreateDateColumn({ name: 'date_created' })
     public createdAt!: Date;
 }

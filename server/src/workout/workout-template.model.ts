@@ -12,10 +12,10 @@ export interface WorkoutTemplateExerciseModel {
 }
 
 type WorkoutTemplateExerciseSetModel = {
-    isEmpty: true
+    isEmpty: true;
 };
 
 export enum ExerciseType {
     DURATION = 'DURATION',
-    REPETITION = 'REPETITION'
+    REPETITION = 'REPETITION',
 }
