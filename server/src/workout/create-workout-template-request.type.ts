@@ -1,7 +1,6 @@
 import { WorkoutTemplateExerciseModel } from './workout-template-exercise.model';
 
-export interface WorkoutTemplateModel {
-    workoutTemplateId: string;
+export interface CreateWorkoutTemplateRequest {
     name: string;
     workoutTemplateExercises: WorkoutTemplateExerciseModel[];
 }

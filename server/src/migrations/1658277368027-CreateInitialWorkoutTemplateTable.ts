@@ -1,15 +1,12 @@
 import { MigrationInterface, QueryRunner } from 'typeorm';
 
-export class InitialDataModelSetup1658267537649 implements MigrationInterface {
+export class CreateInitialWorkoutTemplateTable1658277368027 implements MigrationInterface {
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.query(`
-            CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
-        `);
-        await queryRunner.query(`
-            CREATE TABLE public.exercises (
-                exercise_id UUID NOT NULL PRIMARY KEY DEFAULT uuid_generate_v4()
+            CREATE TABLE public.workout_templates (
+                workout_template_id UUID NOT NULL PRIMARY KEY DEFAULT uuid_generate_v4()
                 , name VARCHAR NOT NULL
-                , exercise_type VARCHAR NOT NULL
+                , workout_template_exercises JSONB NOT NULL
                 , date_updated DATE NOT NULL DEFAULT CURRENT_TIMESTAMP
                 , date_created DATE NOT NULL DEFAULT CURRENT_TIMESTAMP
             );
@@ -18,7 +15,7 @@ export class InitialDataModelSetup1658267537649 implements MigrationInterface {
 
     public async down(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.query(`
-            DROP TABLE public.exercises;
+            DROP TABLE public.workout_templates;
         `);
     }
 }

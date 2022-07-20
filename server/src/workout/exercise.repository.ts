@@ -16,8 +16,12 @@ export class ExerciseRepository {
         return this.repository.insert(request);
     };
 
-    get = async (request: GetExerciseRequest) => {
+    getOrDefault = async (request: GetExerciseRequest) => {
         return this.repository.findOneBy(request);
+    };
+
+    get = async (request: GetExerciseRequest) => {
+        return this.repository.findOneByOrFail(request);
     };
 
     delete = async (request: GetExerciseRequest) => {

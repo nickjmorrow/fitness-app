@@ -15,8 +15,12 @@ export class ExerciseService {
         return this.exerciseRepository.get(request);
     };
 
+    getOrDefault = async (request: GetExerciseRequest) => {
+        return this.exerciseRepository.getOrDefault(request);
+    };
+
     createIfNotExists = async (request: CreateExerciseRequest) => {
-        const existingExercise = await this.get(request);
+        const existingExercise = await this.getOrDefault(request);
 
         if (existingExercise === null) {
             await this.create(request);

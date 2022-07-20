@@ -1,8 +1,8 @@
 import { Controller, Get } from '@nestjs/common';
 import { WorkoutEntryProvider } from './workout-entry-provider.service';
 import { WorkoutEntryModel } from './workout-entry.model';
-import { WorkoutTemplateProvider } from './workout-template-provider.service';
 import { WorkoutTemplateModel } from './workout-template.model';
+import { WorkoutTemplateService } from './workout-template.service';
 
 interface GetWorkoutTemplatesDto {
     workoutTemplates: WorkoutTemplateModel[];
@@ -15,7 +15,7 @@ interface GetWorkoutEntriesDto {
 @Controller('workout')
 export class WorkoutController {
     constructor(
-        private readonly workoutTemplateProvider: WorkoutTemplateProvider,
+        private readonly workoutTemplateService: WorkoutTemplateService,
         private readonly workoutEntryProvider: WorkoutEntryProvider,
     ) {}
 
@@ -26,8 +26,8 @@ export class WorkoutController {
     }
 
     @Get('/workout-templates')
-    getWorkoutTemplates(): GetWorkoutTemplatesDto {
-        const workoutTemplates = this.workoutTemplateProvider.getWorkoutTemplates();
+    async getWorkoutTemplates(): Promise<GetWorkoutTemplatesDto> {
+        const workoutTemplates = await this.workoutTemplateService.getWorkoutTemplates();
         return { workoutTemplates };
     }
 }

@@ -1,10 +1,18 @@
+import { JoinColumn, OneToOne } from 'typeorm';
+import { Exercise } from './exercise.entity';
 import { WorkoutEntryExercise } from './workout-entry-exercise.entity';
 import { WorkoutTemplate } from './workout-template.entity';
 
 export class WorkoutEntry {
     public workoutEntryId!: string;
 
-    public workoutTemplate?: WorkoutTemplate;
+    public workoutTemplateId?: string;
 
-    public workoutEntryExercises!: WorkoutEntryExercise[];
+    public name!: string;
+
+    public workoutEntryExercises!: {
+        exerciseId: string;
+        name: string;
+        sets: {}[];
+    }[];
 }
