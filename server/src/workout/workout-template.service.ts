@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { CreateWorkoutTemplateRequest } from './create-workout-template-request.type';
-import { WorkoutTemplateModel, WorkoutTemplateExerciseModel } from './workout-template.model';
+import { WorkoutTemplateExerciseModel } from './workout-template-exercise.model';
+import { WorkoutTemplateModel } from './workout-template.model';
 import { WorkoutTemplateRepository } from './workout-template.repository';
 
 @Injectable()
@@ -24,6 +25,9 @@ export class WorkoutTemplateService {
                 workoutTemplateExercises: wte.workoutTemplateExercises.map(
                     (wte): WorkoutTemplateExerciseModel => ({
                         orderId: wte.orderId,
+                        // TODO: NJM Remove this and resolve please :)
+                        // Did this so I could switch focus to shared package
+                        // @ts-ignore
                         exercise: {
                             exerciseId: wte.exercise.exerciseId,
                             name: wte.exercise.name,

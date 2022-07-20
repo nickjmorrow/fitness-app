@@ -3,8 +3,8 @@ import { CreateWorkoutTemplateRequest } from '~/workout/create-workout-template-
 import { Exercise } from '~/workout/exercise.entity';
 import { ExerciseType } from '~/workout/exercise.model';
 import { ExerciseService } from '~/workout/exercise.service';
-import { WorkoutTemplateExercise } from '~/workout/workout-template-exercise.type';
 import { WorkoutTemplateService } from '~/workout/workout-template.service';
+import { WorkoutTemplateExerciseModel } from '~/workout/workout-template-exercise.model';
 
 const EXERCISE_NAMES = {
     SQUAT: 'Squat',
@@ -68,7 +68,9 @@ export class DataSeederService {
         await this.workoutTemplateService.deleteAll();
 
         const createWorkoutTemplateRequests: CreateWorkoutTemplateRequest[] = SEEDED_WORKOUT_TEMPLATES.map((swt) => {
-            const exercises: WorkoutTemplateExercise[] = swt.exercises.map((e, i) => ({
+            // TODO: NJM comment out, did this so I could swap focus to shared package.
+            // @ts-ignore
+            const exercises: WorkoutTemplateExerciseModel[] = swt.exercises.map((e, i) => ({
                 exercise: this.exerciseNameToExerciseMapping[e.name],
                 orderId: i,
             }));
