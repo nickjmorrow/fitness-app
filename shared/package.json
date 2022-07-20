@@ -2,13 +2,19 @@
   "name": "@nickjmorrow/fitness-app-shared",
   "version": "1.0.0",
   "description": "Shared code for fitness app.",
-  "main": "index.js",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "scripts": {
+    "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "files": [
+    "lib/**/*"
+  ],
+  "author": "Nicholas Morrow",
   "license": "ISC",
-  "dependencies": {
+  "dependencies": {},
+  "devDependencies": {
     "typescript": "^4.7.4"
   }
 }

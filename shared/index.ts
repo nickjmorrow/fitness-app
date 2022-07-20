@@ -1,1 +1,1 @@
-export { ExerciseType } from "./constants/exercise-type.constant";
+export { ExerciseType } from "./src/constants/exercise-type.constant";
